@@ -1,0 +1,35 @@
+.navbar{
+    width: 100%;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+}
+.navbar-left
+{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.navbar-left img{
+    width: 90px;
+}
+.navbar-left ul{
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+.navbar-left ul li{
+    cursor: pointer;
+}
+.navbar-right
+{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.profile
+{
+    display: flex;
+    gap: 20px;
+}
