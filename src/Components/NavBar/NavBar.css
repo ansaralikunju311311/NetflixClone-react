@@ -32,4 +32,36 @@
 {
     display: flex;
     gap: 20px;
+    cursor: pointer;
+    position: relative;
+}
+.icons
+{
+    cursor: pointer;
+}
+.navbar .dropdown
+{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: max-content;
+    background-color: #191919;
+     padding: 18px 22px;
+    border-radius: 2px;
+    /* background-color: antiquewhite; */
+    text-decoration: underline;
+    /* margin-right: 40px; */
+    display: none;
+   
+}
+.navbar .dropdown p
+{
+    font-size: 13px;
+    cursor: pointer;
+   
+
+}
+.profile:hover .dropdown
+{
+    display: block;
 }
