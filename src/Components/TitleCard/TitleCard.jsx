@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import cards_data from '../../assets/cards/Cards_data.js'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './TitleCard.css'
 
+// eslint-disable-next-line react/prop-types
 const TitleCard = ({title,category}) => {
 const [data,Setdata] = useState([])
   const options = {
@@ -12,19 +13,23 @@ const [data,Setdata] = useState([])
     }
   };
   
-  fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`, options)
+  useEffect(()=>
+  {
+    fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`, options)
     .then(res => res.json())
     .then(res => Setdata(res.results))
     .catch(err => console.error(err));
+  },[])
+  
   return (
     <div className='titlecards'>
       <h2>{title?title:"Popolular on Netlix"}</h2>
        <div className="card-list">
           {data.map((card,index)=>{
-              return <div className="card" key={index}>
+              return <Link to={`/player/${card.id}`} className="card" key={index}>
                 <img src={`https://image.tmdb.org/t/p/w500`+card.backdrop_path} alt="" />
                  <p>{card.original_title}</p>
-              </div>
+              </Link>
         })}
        </div>
     </div>
