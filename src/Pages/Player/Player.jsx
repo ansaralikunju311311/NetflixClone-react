@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import back_arrow_icon from '../../assets/back_arrow_icon.png'
 import './Player.css'
 import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios'
 const Player = () => {
     const {id}=useParams();
     const navigate = useNavigate();
@@ -17,13 +18,21 @@ const Player = () => {
 
 
 
+// useEffect(()=>
+// {
+//     fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
+//   .then(res => res.json())
+//   .then(res => SetAPidata(res.results[0]))
+//   .catch(err => console.error(err));
+// },[])
+
 useEffect(()=>
 {
-    fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
-  .then(res => res.json())
-  .then(res => SetAPidata(res.results[0]))
-  .catch(err => console.error(err));
-},[])
+  axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
+  .then(res=>SetAPidata(res.data.results[0]))
+  .catch(error=>console.log(error))
+})
+
 
 
 

@@ -26,7 +26,7 @@ const signup = async (name, email, password) => {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
   
-      // Add user details to Firestore
+  
       await addDoc(collection(db, "user"), {
         uid: user.uid,
         name,

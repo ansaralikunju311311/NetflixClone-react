@@ -6,6 +6,7 @@ import play_icon from '../../assets/play_icon.png';
 import info_icon from '../../assets/info_icon.png';
 import TitleCard from '../../Components/TitleCard/TitleCard';
 import Footer from '../../Components/Footer/Footer';
+import axios from 'axios';
 
 const Home = () => {
   const [data, setData] = useState(null); // State to hold a single movie data
@@ -19,16 +20,36 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    // Fetch movies
-    fetch(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options)
-      .then(res => res.json())
-      .then(res => {
-        const randomIndex = Math.floor(Math.random() * res.results.length);
-        setData(res.results[randomIndex]); 
-      })
-      .catch(err => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   // Fetch movies
+  //   fetch(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options)
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       const randomIndex = Math.floor(Math.random() * res.results.length);
+  //       setData(res.results[randomIndex]); 
+  //     })
+  //     .catch(err => console.error(err));
+  // }, []);
+
+
+
+
+  useEffect(()=>
+  {
+    axios.get(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options)
+
+    // .then(res=>setData(res.data.results[randomIndex]))
+
+    .then(res=>
+    {
+      const randomIndex = Math.floor(Math.random()*res.data.results.length);
+      setData(res.data.results[randomIndex])
+    }
+    )
+    .catch(error=>console.log(error))
+  },[])
+
+
 
   return (
     <div className='home'>

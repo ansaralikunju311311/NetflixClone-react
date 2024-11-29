@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './TitleCard.css'
+import axios from 'axios'
 
 // eslint-disable-next-line react/prop-types
 const TitleCard = ({title,category}) => {
@@ -13,12 +14,23 @@ const [data,Setdata] = useState([])
     }
   };
   
+  // useEffect(()=>
+  // {
+  //   fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`, options)
+  //   .then(res => res.json())
+  //   .then(res => Setdata(res.results))
+  //   .catch(err => console.error(err));
+  // },[])
+
+
+
+
+
   useEffect(()=>
   {
-    fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`, options)
-    .then(res => res.json())
-    .then(res => Setdata(res.results))
-    .catch(err => console.error(err));
+    axios.get(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`,options)
+    .then(res=>Setdata(res.data.results))
+    .catch(error=>console.log(error))
   },[])
   
   return (
