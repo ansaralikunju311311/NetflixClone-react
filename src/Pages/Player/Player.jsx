@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import back_arrow_icon from '../../assets/back_arrow_icon.png'
 import './Player.css'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -31,7 +31,7 @@ useEffect(()=>
   axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
   .then(res=>SetAPidata(res.data.results[0]))
   .catch(error=>console.log(error))
-})
+},[])
 
 
 
