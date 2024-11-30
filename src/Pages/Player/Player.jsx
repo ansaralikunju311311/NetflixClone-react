@@ -16,26 +16,24 @@ const Player = () => {
   }
 };
 
-
-
-// useEffect(()=>
-// {
-//     fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
-//   .then(res => res.json())
-//   .then(res => SetAPidata(res.results[0]))
-//   .catch(err => console.error(err));
-// },[])
-
 useEffect(()=>
 {
-  axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
-  .then(res=>SetAPidata(res.data.results[0]))
-  .catch(error=>console.log(error))
+  const fetchData = async ()=>
+  {
+
+
+    try {
+      const response = await  axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
+    SetAPidata(response.data.results[0]);
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+  };
+  fetchData(); 
+  
 },[])
-
-
-
-
 
 
   return (
@@ -43,10 +41,9 @@ useEffect(()=>
         <img src={back_arrow_icon} alt="" 
          onClick={()=>
          {console.log(`back arrow clicked`)
-          navigate(-2)
+          navigate(-1)
          }}/>
-        {/* <iframe src={`https://www.youtube.com/emebed/${apiData.key}`} frameborder='0' width='90%' height='90%' title='Trailer'
-        allowFullScreen></iframe> */}
+        
 
 
 <iframe 

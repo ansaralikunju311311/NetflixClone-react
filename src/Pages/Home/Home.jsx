@@ -18,17 +18,22 @@ const Home = () => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MGRhYWI5NjNmNjE5Y2FhYmUzMGJlMjJlY2E3MmRmMyIsIm5iZiI6MTczMTgyNDA3OS43NjIzNjQxLCJzdWIiOiI2NzM5ODZkMzczYTQ1ZTUxODRiZjdlZjIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.YD8VxLujI9W-4SMS1R-MFamyxPt5W2PXF7hG2nl46Q4'
     }
   };
-  useEffect(()=>
-  {
-    axios.get(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options)
-    .then(res=>
-    {
-      const randomIndex = Math.floor(Math.random()*res.data.results.length);
-      setData(res.data.results[randomIndex])
-    }
-    )
-    .catch(error=>console.log(error))
-  },[])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`,
+          options
+        );
+        const randomIndex = Math.floor(Math.random() * response.data.results.length);
+        setData(response.data.results[randomIndex]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData(); 
+  }, []); 
   return (
     <div className='home'>
       <NavBar />

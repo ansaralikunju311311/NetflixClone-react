@@ -14,18 +14,22 @@ const [data,Setdata] = useState([])
     }
   };
   
-  
-
-
-
-
-
   useEffect(()=>
   {
-    axios.get(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`,options)
-    .then(res=>Setdata(res.data.results))
-    .catch(error=>console.log(error))
+    const fetchData = async ()=>
+      {
+         try {
+           const response = await  axios.get(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`,options);
+    
+           Setdata(response.data.results)
+         } catch (error) {
+          console.log(error)
+         }
+      };
+      fetchData();
   },[])
+
+  
   
   return (
     <div className='titlecards'>
